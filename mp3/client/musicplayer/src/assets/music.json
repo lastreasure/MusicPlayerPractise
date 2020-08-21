@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Runaway.mp3",
+        "artist": "Xavier Toscana",
+        "genre": "Pop"
+    },
+    {
+        "name": "song2.mp3",
+        "artist": "artist2",
+        "genre": "Folk"
+    },
+    {
+        "name": "song4.mp3",
+        "artist": "Xavier Toscana",
+        "genre": "Hip hop"
+    },
+    {
+        "name": "song5.mp3",
+        "artist": "Xavier Toscana",
+        "genre": "Pop"
+    },
+    {
+        "name": "Dont Worry, Be Happy.mp3",
+        "artist": "Bobby McFarrin",
+        "genre": "Reggae"
+    }
+]

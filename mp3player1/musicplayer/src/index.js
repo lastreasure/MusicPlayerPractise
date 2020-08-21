@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import music from '../src/assets/music.json'
 
 class Slider extends Component {
     render(){
@@ -18,7 +19,7 @@ class MusicPlayer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mppath:'../public/music.json',
+      mppath: music,
       mpname:'song2.mp3',
       mpartist: 'artist2',
       audiopath: '',
