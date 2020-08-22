@@ -1,22 +1,17 @@
 import React, { Component } from 'react'
+// connects component to redux store - provided by provider component in App.js
+import { connect } from 'react-redux'; 
+// retrieve action from mpActions
+import { getSongs } from '../actions/mpActions'
 
 class Songs extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            songs: []
-        }
-    }
-
     componentDidMount() {
-        fetch('http://localhost:5000/songs')
-        .then(res => res.json())
-        .then(data => this.setState({ songs: data }))
+        this.props.getSongs();
     }
 
     render() {
-        const songItems = this.state.songs.map( song => (
+
+        const songItems = this.props.songs.map( song => (
             <div key={song._id}>
                 <h3> {song.title} </h3>
                 <p>{song.artist}</p>
@@ -31,4 +26,9 @@ class Songs extends Component {
     }
 }
 
-export default Songs;
+// Retrieve state from redux and map to properties to the component to use inside the component
+const mapStateToProps = state => ({
+    songs: state.songs.allSongs
+})
+
+export default connect(mapStateToProps, {getSongs})(Songs);
