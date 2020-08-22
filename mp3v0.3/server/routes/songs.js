@@ -1,19 +1,32 @@
 const express = require('express');
 const router = express.Router();
 const Songs = require('../models/song');
-const Platlist = require('../models/playlist');
 
 // GET req - get all songs
-// router.get('/songs', songsController.getSongs);
 router.get('/songs', async (req,res) => {
     try {
         const allSongs = await Songs.find();
+        console.log(allSongs)
         res.json(allSongs);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error
     }
 })
 
+// GET req - get specific songs by id
+router.get('/songs/:id', async (req,res) => {
+    console.log(req.params.id);
+    try {
+        const singleSong = await Songs.find({_id: req.params.id});
+        console.log(singleSong)
+        res.json(singleSong);
+    } catch (err) {
+        res.status(500).json({message: err.message}); // Server error
+    }
+})
+
+
+// post a song
 router.post('/songs', async (req,res) => {
     const newSong = new Songs({
         title: req.body.title,
