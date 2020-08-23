@@ -21,10 +21,10 @@ export const play = (audio) => dispatch => {
     } else {
         audio.pause();
     }
-    dispatch( {
-        type: PLAY,
-        payload: audio.paused
-    })
+    // dispatch( {
+    //     type: PLAY,
+    //     payload: audio.paused
+    // })
 }
 
 

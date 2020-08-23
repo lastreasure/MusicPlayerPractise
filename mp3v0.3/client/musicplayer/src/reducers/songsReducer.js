@@ -17,7 +17,7 @@ export default function(state = initialState, action) {
         case PLAY:
             return {
                 ...state,
-                isPlaying: action.payload
+                isPlaying: !state.isPlaying
             }
         default: // return current state as default 
             return state;
