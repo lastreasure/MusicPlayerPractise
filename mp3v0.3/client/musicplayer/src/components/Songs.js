@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 // retrieve action from mpActions
 import { getSongs } from '../actions/mpActions'
 
+
 class Songs extends Component {
     componentDidMount() {
         this.props.getSongs();
@@ -17,6 +18,7 @@ class Songs extends Component {
                 <p>{song.artist}</p>
             </div>
         ));
+
         return (
             <div>
                 <h1>Songs</h1>
@@ -28,7 +30,7 @@ class Songs extends Component {
 
 // Retrieve state from redux and map to properties to the component to use inside the component
 const mapStateToProps = state => ({
-    songs: state.songs.allSongs
+    songs: state.musicplayer.allSongs
 })
 
 export default connect(mapStateToProps, {getSongs})(Songs);

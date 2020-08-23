@@ -11,7 +11,6 @@ class SongImage extends Component {
         }
     }
 
-
     componentDidMount() {
         const songId= "5f3f83fbaf74801987a8a8c1";
         fetch(`http://localhost:5000/songs/${songId}`)

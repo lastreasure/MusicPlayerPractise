@@ -1,7 +1,8 @@
 import { GET_SONGS, PLAY } from '../actions/types';
 
 const initialState = {
-    allSongs: []
+    allSongs: [],
+    isPlaying: false
 }
 
 export default function(state = initialState, action) {
@@ -13,7 +14,12 @@ export default function(state = initialState, action) {
                 ...state,
                 allSongs: action.payload
             }
-        default: //return current state as default 
+        case PLAY:
+            return {
+                ...state,
+                isPlaying: action.payload
+            }
+        default: // return current state as default 
             return state;
 
     }

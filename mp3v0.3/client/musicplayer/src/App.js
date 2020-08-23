@@ -1,17 +1,20 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import Songs from './components/Songs';
 // import SongImage from './components/SongImage';
 import Play from './components/Controls/Play';
-import { Provider } from 'react-redux';
+import { useSelector } from 'react-redux';
 
-import store from './store';
 
-class App extends Component {
-  render () {
+function App()  {
+
+
+    const songs = useSelector(state => state.allSongs);
+
+    console.log("from app " + songs) 
+
     return (
       // Provider takes the store and the store holds the state
-      <Provider store={store}>
         <div className="App">
           {/* <SongImage/> */}
           <hr />
@@ -19,9 +22,8 @@ class App extends Component {
           <hr />
           <Play />
         </div>
-      </Provider>
     );
-  }
+  
 }
 
 export default App;

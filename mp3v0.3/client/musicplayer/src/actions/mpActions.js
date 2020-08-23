@@ -13,3 +13,34 @@ export const getSongs = () => dispatch => {
         payload: songs
     }));
 }
+
+export const play = (audio) => dispatch => { 
+    console.log("from mpactions play "+ audio.paused)
+    if(audio.paused) {
+        audio.play();
+    } else {
+        audio.pause();
+    }
+    dispatch( {
+        type: PLAY,
+        payload: audio.paused
+    })
+}
+
+
+// export function play(audio) {
+//     if (!this.isPlaying) {
+//         audio.play();
+//     } else {
+//         audio.pause();
+//     }
+//     return {
+//         type: PLAY,
+//         payload: audio.isPlaying
+//     }
+// }
+
+
+    // const isPlay = this.isPlaying === false ? true : false;
+    // console.log(this.isPlaying);
+    // if(isPlay) {
