@@ -13,12 +13,8 @@ class ControlPanel extends Component {
     }
 
     componentWillReceiveProps() {
-        this.setState({ play: true });
+        this.setState({ play: false });
     };
-
-    // componentDidMount() {
-
-    // }
 
     play = (audio) => {
         if (this.state.play) {
@@ -34,7 +30,6 @@ class ControlPanel extends Component {
 
         console.log(this.props.audioSource)
         // let audioFile = new Audio(this.props.audioSource)
-        
 
         return (
 

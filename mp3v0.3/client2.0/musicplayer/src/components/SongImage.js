@@ -16,8 +16,8 @@ class SongImage extends Component {
         fetch(`http://localhost:5000/songs/${songId}`)
         .then(res => res.json())
         .then(data => this.setState({ song: data}))
-    }
 
+    }
 
     render() {
         // const songPic = this.state.song.map( song => (
@@ -26,7 +26,7 @@ class SongImage extends Component {
         
         this.state.image = this.state.song.map( song => (
             song.imageSource
-        ));  // use set state...
+        ));  // use set state?..
         
         console.log(this.state.image);
 
