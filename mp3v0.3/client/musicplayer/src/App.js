@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import Songs from './components/Songs';
 // import SongImage from './components/SongImage';
 import Play from './components/Controls/Play';
@@ -18,7 +17,7 @@ function App()  {
         <div className="App">
           {/* <SongImage/> */}
           <hr />
-          <Songs/>
+          {/* <Songs/> */}
           <hr />
           <Play />
         </div>

@@ -21,26 +21,4 @@ export const play = (audio) => dispatch => {
     } else {
         audio.pause();
     }
-    // dispatch( {
-    //     type: PLAY,
-    //     payload: audio.paused
-    // })
 }
-
-
-// export function play(audio) {
-//     if (!this.isPlaying) {
-//         audio.play();
-//     } else {
-//         audio.pause();
-//     }
-//     return {
-//         type: PLAY,
-//         payload: audio.isPlaying
-//     }
-// }
-
-
-    // const isPlay = this.isPlaying === false ? true : false;
-    // console.log(this.isPlaying);
-    // if(isPlay) {
