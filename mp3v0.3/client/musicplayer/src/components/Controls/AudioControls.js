@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { TOGGLE_PLAY } from '../../store/slices'
 
 
-const Play = ({togglePlay, play}) => {
+const AudioControls = ({togglePlay, play}) => {
     return (
         <div>
             <button onClick={()=> togglePlay()}> {play ?'Play' : 'Pause'}</button>
@@ -23,5 +23,5 @@ const mapDispatchToProps = {
     togglePlay: TOGGLE_PLAY
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Play);
+export default connect(mapStateToProps, mapDispatchToProps)(AudioControls);
 

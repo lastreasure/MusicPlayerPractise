@@ -1,12 +1,10 @@
 import React from 'react';
 import Songs from './components/Songs';
-// import SongImage from './components/SongImage';
-import Play from './components/Controls/Play';
+import AudioControls from './components/Controls/AudioControls';
 import { useSelector } from 'react-redux';
 
 
 function App()  {
-
 
     const songs = useSelector(state => state.allSongs);
 
@@ -15,11 +13,8 @@ function App()  {
     return (
       // Provider takes the store and the store holds the state
         <div className="App">
-          {/* <SongImage/> */}
           <hr />
-          {/* <Songs/> */}
-          <hr />
-          <Play />
+          <AudioControls />
         </div>
     );
   
