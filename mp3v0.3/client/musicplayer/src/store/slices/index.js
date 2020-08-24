@@ -7,10 +7,14 @@ const mpSlice = createSlice({
         TOGGLE_PLAY: (state) => ({
             ...state,
             isPlaying: !state.isPlaying
+        }),
+        GET_SONGS: (state) => ({
+            ...state,
+            allSongs: []
         })
     }
 })
 
-export const {TOGGLE_PLAY} = mpSlice.actions;
+export const {TOGGLE_PLAY, GET_SONGS} = mpSlice.actions;
 
 export default mpSlice;
