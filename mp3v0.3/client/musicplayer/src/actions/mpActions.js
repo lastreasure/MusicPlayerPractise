@@ -14,30 +14,56 @@ export const getSongs = () => dispatch => {
     }));
 }
 
-export const play = (audio) => dispatch => { 
-    console.log("from mpactions play "+ audio.paused)
-    if(audio.paused) {
-        audio.play();
-    } else {
-        audio.pause();
-    }
-    // dispatch( {
-    //     type: PLAY,
-    //     payload: audio.paused
-    // })
-}
-
-
-// export function play(audio) {
-//     if (!this.isPlaying) {
+// export const play = (audio) => dispatch => { 
+//     console.log("from mpactions play "+ audio.paused)
+//     if(audio.paused) {
 //         audio.play();
 //     } else {
 //         audio.pause();
 //     }
-//     return {
-//         type: PLAY,
-//         payload: audio.isPlaying
+//     // dispatch({
+//     //     type: PLAY,
+//     //     payload: audio.paused
+//     // }) 
+// }
+// export const play = (audio, isplay) => dispatch => { 
+//     console.log("from mpactions play "+ audio.paused)
+//     if(isplay) {
+//         audio.play();
+//     } else {
+//         audio.pause();
 //     }
+//     dispatch( {
+//         type: PLAY,
+//         payload: isplay
+// })
+// }
+
+
+// export function play(audio) { 
+//     console.log("from mpactions play "+ audio.paused)
+//     if(audio.paused) {
+//         audio.play();
+//     } else {
+//         audio.pause();
+//     }
+//     // dispatch( {
+//     //     type: PLAY,
+//     //     payload: audio.paused
+//     // })
+// }
+
+
+// export const play = (audio) =>{
+//     if (audio.paused) {
+//         audio.play();
+//     } else {
+//         audio.pause();
+//     }
+//     // return {
+//     //     type: PLAY,
+//     //     payload: audio.isPlaying
+//     // }
 // }
 
 

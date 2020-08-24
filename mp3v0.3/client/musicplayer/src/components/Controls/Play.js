@@ -3,29 +3,60 @@ import { connect } from 'react-redux';
 // retrieve action from mpActions
 import { play } from '../../actions/mpActions'
 
-
 class Play extends Component {
+    
+    play = (audioFile) => dispatch => { 
+    if(this.props.isPlay) {
+            audioFile.play()
+        } else {
+            audioFile.pause()
+        }
+        dispatch ({type: 'PLAY', payload: !this.props.isPlay})
+    }
 
     render() {
-    
-        let audio = new Audio('Dont_Worry_Be_Happy.mp3')
+        console.log("this be the props "+ this.props)
+
+        let audioFile = new Audio('Dont_Worry_Be_Happy.mp3')
+
+        console.log("from play 1 " + this.props.isPlay);
         
         return (
             <div>
-                <button onClick={()=> this.props.play(audio)}> play</button>
+                {/* <button onClick={()=> this.props.play(audio)}> play</button> */}
+                <button onClick={this.play(audioFile)}> play</button>
+                {/* <button onClick={this.pause(audioFile)}> pause</button> */}
+
             </div>
         )
     }
 }
 
 // Retrieve state from redux and map to properties to the component to use inside the component
-const mapStateToProps = state => ({
-    play: state.musicplayer.isPlaying
-})
+const mapStateToProps = state => { return {
+    isPlay: state.musicplayer.isPlaying
+}}
 
-export default connect(mapStateToProps, {play})(Play);
+const mapDispatchToProps = dispatch => {
+    return {
+        onPlaying: () => dispatch({type: 'PLAY', payload: !this.props.isPlay})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Play);
 
 
+// function play (audioFile) { 
+//     console.log("from new play play 2 "+ audioFile.paused)
+//     let boo = 
+//     if(this.props.isPlay) {
+//         audioFile.play();
+//     } else {
+//         audioFile.pause();
+//     }
+
+//     // {this.onPlaying()}
+// }
 
 
 // render() {

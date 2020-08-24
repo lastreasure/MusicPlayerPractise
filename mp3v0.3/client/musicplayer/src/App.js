@@ -1,26 +1,18 @@
 import React from 'react';
 import './App.css';
-import Songs from './components/Songs';
-// import SongImage from './components/SongImage';
-import Play from './components/Controls/Play';
-import { useSelector } from 'react-redux';
+import Header from './components/Header';
+import ControlPanel from './components/Controls/ControlPanel'
+import {Typography} from '@material-ui/core';
 
 
 function App()  {
-
-
-    const songs = useSelector(state => state.allSongs);
-
-    console.log("from app " + songs) 
-
     return (
-      // Provider takes the store and the store holds the state
         <div className="App">
-          {/* <SongImage/> */}
-          <hr />
-          <Songs/>
-          <hr />
-          <Play />
+          <Typography>hello</Typography>
+            <Header />
+            <hr />
+            <ControlPanel/>
+            <hr />
         </div>
     );
   
