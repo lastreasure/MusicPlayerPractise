@@ -18,7 +18,6 @@ const mpSlice = createSlice({
             ...state,
             allSongs: action.payload,
             currentSong: action.payload[0] || {} // if not set then return empty object
-            
         }),
         GET_SONGS_FAILURE: (state, action) => ({ // cancel loader then show error response
             ...state,
@@ -34,7 +33,7 @@ const mpSlice = createSlice({
         }),
         SHUFFLE: (state, action) => ({
             ...state,
-            allSongs: action.payload
+            allSongs: shuffle(action.payload)
         }),
     }
 })
@@ -56,6 +55,17 @@ export const getSongs = () => dispatch => {
     // dispatch the state to the reducer
     .then(songs => dispatch(GET_SONGS_SUCCESS(songs)))
     .catch((error) => dispatch(GET_SONGS_FAILURE(error)));
+}
+
+function shuffle (arr) { 
+    const length = arr.length;
+    for(let i = length-1; i > 0; i--){
+        const j = Math.floor(Math.random() * i)
+        const temp = arr[i]
+        arr[i] = arr[j]
+        arr[j] = temp
+        return temp
+    }
 }
 
 export default mpSlice;

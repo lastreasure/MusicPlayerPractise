@@ -1,7 +1,8 @@
 import React from 'react';
 import AudioControls from './components/Controls/AudioControls';
-import store from './store'
-import { getSongs } from './store/slices'
+import SongImage from './components/SongDisplay/SongImage';
+import store from './store';
+import { getSongs } from './store/slices';
 
 
 function App()  {
@@ -16,6 +17,7 @@ function App()  {
           <hr />
           <AudioControls />
           <hr />
+          {/* <SongImage /> */}
         </div>
     );
   

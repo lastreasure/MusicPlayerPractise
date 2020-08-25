@@ -8,6 +8,9 @@ let songNum = 0
 
 const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSong={}}) => {
 
+    // console.log('this is image source: ' + currentSong);
+
+
     const iterator = () => {
         if(songNum === allSongs.length) {
             songNum = 0;
@@ -35,7 +38,6 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
             audioFile.pause()
         }
     }
-    // console.log("from audio " + JSON.stringify(allSongs) + allSongs.length)
 
     React.useEffect(() => {
         audioFile.src=currentSong.songSource
@@ -47,7 +49,7 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
             <button id='previousButton' onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> Skip Back </button>
             <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button>
             <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button>
-            <button id='shuffleButton' onClick={() => {shuffle()}}> Shuffle </button>
+            {/* <button id='shuffleButton' onClick={() => {shuffle(allSongs)}}> Shuffle </button> */}
 
         </div>
     )
@@ -59,6 +61,7 @@ const mapStateToProps = state => ({
     play: state.isPlaying,
     currentSong: state.currentSong,
     allSongs: state.allSongs
+
 })
 
 // mapping slice action function to properties
