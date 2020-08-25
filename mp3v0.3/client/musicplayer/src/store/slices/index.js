@@ -32,11 +32,21 @@ const mpSlice = createSlice({
             ...state,
             currentSong: state.allSongs[action.payload]
         }),
+        SHUFFLE: (state, action) => ({
+            ...state,
+            allSongs: action.payload
+        }),
     }
 })
 
 // destructuring th e actions from the slice
-export const {TOGGLE_PLAY, GET_SONGS_SUCCESS, GET_SONGS_REQUEST, GET_SONGS_FAILURE, NEXT_SONG} = mpSlice.actions;
+export const {  TOGGLE_PLAY, 
+                GET_SONGS_SUCCESS, 
+                GET_SONGS_REQUEST, 
+                GET_SONGS_FAILURE, 
+                NEXT_SONG,
+                SHUFFLE} 
+                = mpSlice.actions;
 
 // FETCHING SONGS
 export const getSongs = () => dispatch => {

@@ -28,8 +28,8 @@ router.get('/songs/:id', async (req,res) => {
         singleSong.imageSource = `http://localhost:5000/songImage/${singleSong.imageSource}`
         singleSong.songSource = `http://localhost:5000/songAudio/${singleSong.songSource}`
 
-        // console.log(singleSong)
         res.json(singleSong);
+    
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error
     }

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Playlist = require('../models/playlist');
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 const axios = require('axios');
 
 
@@ -18,23 +18,11 @@ router.get('/playlists', async (req,res) => {
 
 // GET req - get specific playlist by id
 router.get('/playlists/:id', async (req,res) => {
+
     try {
         const singlePlaylistArr = await Playlist.find({_id: req.params.id});
-        const singlePlaylist = singlePlaylistArr[0];
-        
-        singlePlaylist.playlistSongId.forEach( async (id) => {
-            console.log('this is the playlist id i hope: ' + id)
-            await axios.get(`http://localhost:5000/songs/${id}`)
-            .then(res => {
-                singlePlaylist.playlistSongs.push(JSON.stringify(res.data))
-                console.log("data obj " + res)
-            })
-            .catch(function(err) {
-                console.log('fetch error' + err);
-            })
-        })
-
-        console.log(singlePlaylist)
+        singlePlaylist = singlePlaylistArr[0];
+        console.log(singlePlaylist);
         res.json(singlePlaylist);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error
@@ -57,12 +45,22 @@ router.post('/playlists', async (req,res) => {
     }
 })
 
+
 module.exports = router;
 
 
 
+// singlePlaylist.playlistSongId.forEach( async (id) => {
+//     await axios.get(`http://localhost:5000/songs/${id}`)
+//     .then(songs =>  singlePlaylist.playlistSongs.push(songs))
+//     .catch(function(err) {
+//         console.log('fetch error' + err);
+//     })
+// })
 
+// console.log(singlePlaylist.playlistSongs)
 
+///////
 
 
         // allPlaylists.forEach((playlist) => {
@@ -79,31 +77,6 @@ module.exports = router;
         //         })
         //     })
         // })
-
-
-// async function getSongs() {
-
-
-//         allPlaylists.forEach( (playlist) => {
-//                 playlist.playlistSongId.forEach(async (id) => {
-//                 console.log('this is the playlist id i hope: ' + id)
-//                 const song = await fetch(`https://localhost:5000/songs/${id}`)
-//                 .then(res => res.json())
-//                 .then(function(data) {
-//                     song = data.json();
-//                 })
-//                 .catch(function(err) {
-//                     console.log('fetch error' + err);
-//                 })
-
-//                 console.log(song)
-
-//                 console.log("this is the song i hope: " + song)
-//             })
-//             console.log('this is the playlist ' + playlist)
-//             console.log('from playlists id playlist: ' + playlist.playlistSongId)
-//         })
-// }
 
 
 

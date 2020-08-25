@@ -1,13 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
-import { TOGGLE_PLAY, NEXT_SONG } from '../../store/slices'
+import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
 
 const audioFile = new Audio();
 let songNum = 0
 
-const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) => {
-
+const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSong={}}) => {
 
     const iterator = () => {
         if(songNum === allSongs.length) {
@@ -36,8 +35,6 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) =
             audioFile.pause()
         }
     }
-
-
     // console.log("from audio " + JSON.stringify(allSongs) + allSongs.length)
 
     React.useEffect(() => {
@@ -47,9 +44,10 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) =
     
     return (
         <div>
-            <button id='previousButton' onClick={() => {decrement(); console.log("from dec " + songNum)}}> Skip Back </button>
+            <button id='previousButton' onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> Skip Back </button>
             <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button>
             <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button>
+            <button id='shuffleButton' onClick={() => {shuffle()}}> Shuffle </button>
 
         </div>
     )
@@ -66,7 +64,8 @@ const mapStateToProps = state => ({
 // mapping slice action function to properties
 const mapDispatchToProps = {
     togglePlay: TOGGLE_PLAY,
-    nextSong: NEXT_SONG
+    nextSong: NEXT_SONG,
+    shuffle: SHUFFLE
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioControls);
