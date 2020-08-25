@@ -6,10 +6,9 @@ const Songs = require('../models/song');
 router.get('/songs', async (req,res) => {
     try {
         const allSongs = await Songs.find();
-
         allSongs.forEach((song) => {
-            song.imageSource = `https://localhost:5000/songAsset/${song.imageSource}`
-            song.songSource = `https://localhost:5000/songAsset/${song.songSource}`
+            song.imageSource = `https://localhost:5000/songImage/${song.imageSource}`
+            song.songSource = `https://localhost:5000/songAudio/${song.songSource}`
         })
 
         console.log(allSongs)
@@ -24,6 +23,11 @@ router.get('/songs/:id', async (req,res) => {
     console.log(req.params.id);
     try {
         const singleSong = await Songs.find({_id: req.params.id});
+        singleSong.map((song) => {
+            song.imageSource = `https://localhost:5000/songImage/${song.imageSource}`
+            song.songSource = `https://localhost:5000/songAudio/${song.songSource}`
+        })
+        
         console.log(singleSong)
         res.json(singleSong);
     } catch (err) {
