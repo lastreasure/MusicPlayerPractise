@@ -22,7 +22,7 @@ const db = mongoose.connection;
 db.on('error', (error) => console.log(error));
 db.once('open', () => console.log('Connected to MongoDB'));
 
-// Prevent CORS issues and allow client access to api 
+// Prevent CORS issues and allow client access to API 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', '*');
