@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 
 const songsRouter = require('./routes/songs');
 const playlistsRouter = require('./routes/playlists');
+const assetsRouter = require('./routes/assets');
 
 
 // Create db connection 
@@ -35,8 +36,10 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
+
 app.use(songsRouter);
 app.use(playlistsRouter);
+app.use(assetsRouter);
 
 
 app.listen(5000, () => console.log('Server started'));
