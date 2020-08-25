@@ -1,20 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const mpSlice = createSlice({
+    // Name used in action types
     name: 'MUSIC_PLAYER',
+    // Initial state for the reducer to use
     initialState: {},
+    // An object of reducers whoms name will generate an action
     reducers: {
         TOGGLE_PLAY: (state) => ({
             ...state,
             isPlaying: !state.isPlaying
         }),
-        GET_SONGS: (state) => ({
+        GET_SONGS_REQUEST: (state) => ({ // loading variable 
+            ...state
+        }),
+        GET_SONGS_SUCCESS: (state, action) => ({ 
             ...state,
-            allSongs: []
-        })
+            allSongs: action.payload
+        }),
+        GET_SONGS_FAILURE: (state, action) => ({ // cancel loader then show error response
+            ...state,
+            error: action.payload
+        }),
     }
 })
 
-export const {TOGGLE_PLAY, GET_SONGS} = mpSlice.actions;
+// destructuring th e actions from the slice
+export const {TOGGLE_PLAY, GET_SONGS_SUCCESS, GET_SONGS_REQUEST, GET_SONGS_FAILURE} = mpSlice.actions;
+
+// FETCHING SONGS
+export const getSongs = () => dispatch => {
+    dispatch(GET_SONGS_REQUEST())
+    fetch('http://localhost:5000/songs')
+    .then(res => res.json())
+    // dispatch the state to the reducer
+    .then(songs => dispatch(GET_SONGS_SUCCESS(songs)))
+    .catch((error) => dispatch(GET_SONGS_FAILURE(error)));
+}
 
 export default mpSlice;

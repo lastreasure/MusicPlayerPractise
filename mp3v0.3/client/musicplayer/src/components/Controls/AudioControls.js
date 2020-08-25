@@ -1,13 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
 import { TOGGLE_PLAY } from '../../store/slices'
 
+const audioFile = new Audio('Dont_Worry_Be_Happy.mp3');
 
 const AudioControls = ({togglePlay, play}) => {
+
+    const audioPlay = () => {
+        if (!play) {
+            audioFile.play()
+        } else {
+            audioFile.pause()
+        }
+    }
+
     return (
         <div>
-            <button onClick={()=> togglePlay()}> {play ?'Play' : 'Pause'}</button>
+            <button id='playButton' onClick={() => {togglePlay(); audioPlay()}}> {play ? 'Play' : 'Pause'} </button>
         </div>
     )
 }
@@ -18,7 +28,7 @@ const mapStateToProps = state => ({
     play: state.isPlaying
 })
 
-// making slice function to properties
+// mapping slice action function to properties
 const mapDispatchToProps = {
     togglePlay: TOGGLE_PLAY
 }
