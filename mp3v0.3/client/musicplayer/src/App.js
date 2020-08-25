@@ -14,10 +14,8 @@ function App()  {
     return (
       // Provider takes the store and the store holds the state
         <div className="App">
-          <hr />
+          <SongImage />
           <AudioControls />
-          <hr />
-          {/* <SongImage /> */}
         </div>
     );
   

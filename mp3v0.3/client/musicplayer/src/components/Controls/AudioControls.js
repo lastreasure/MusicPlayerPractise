@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 // retrieve action from slices
 import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
 
+import Button from '@material-ui/core/Button'
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+
+
 const audioFile = new Audio();
 let songNum = 0
 
@@ -43,12 +51,32 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
         audioFile.src=currentSong.songSource
     }, [currentSong])
 
-    
+
     return (
         <div>
-            <button id='previousButton' onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> Skip Back </button>
-            <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button>
-            <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button>
+            <Button id='previousButton' variant="contained" color="primary"
+                    onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> 
+                <SkipPreviousIcon/>
+            </Button>
+
+            <Button id='playButton' variant="contained" color="primary" 
+                    onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}>
+                {play ? <PlayArrowIcon/> : <PauseIcon/> }
+            </Button>
+
+            <Button id='skipButton' variant="contained" color="primary"
+                    onClick={() => {iterator()}}>
+                <SkipNextIcon/>
+            </Button>
+
+            <Button id='shuffle' variant="contained" color="primary">
+                <ShuffleIcon/>
+            </Button>
+
+
+            {/* <button id='previousButton' onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> Skip Back </button> */}
+            {/* <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button> */}
+            {/* <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button> */}
             {/* <button id='shuffleButton' onClick={() => {shuffle(allSongs)}}> Shuffle </button> */}
 
         </div>

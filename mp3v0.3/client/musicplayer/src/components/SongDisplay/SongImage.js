@@ -1,21 +1,55 @@
-import React from 'react'
+import React from 'react';
 import { connect } from 'react-redux'; 
+
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+
+
+const useStyles = makeStyles({
+    root: {
+        maxWidth: 350,
+    },
+    media: {
+        height: 350,
+    },
+});
 
 const SongImage = ({currentSong={}}) => {
 
-    // React.useEffect(() => {
-    //     image.src=currentSong.imgSource
-    // }, [currentSong])
-
-    JSON.stringify(currentSong)
+    const classes = useStyles();
+    const theme = useTheme();
     const image = currentSong.imageSource
-    console.log(image)
+    const title = currentSong.title
+    const artist = currentSong.artist
+
 
     return (
-        <div>
-            <image src={image}> </image>
-        </div>
-    )
+        <Card className={classes.root}>
+            <CardActionArea>
+            <CardMedia
+                className={classes.media}
+                image={image}
+                title={title}
+                artist={artist}
+            />
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                {title} - {artist}
+                </Typography>
+            </CardContent>
+            </CardActionArea>
+            <CardActions>
+            </CardActions>
+        </Card>
+        ); 
+    
 }
 
 // Retrieve state from redux and map to properties to the component to use inside the component
@@ -25,4 +59,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps)(SongImage);
+
 
