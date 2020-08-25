@@ -18,6 +18,7 @@ const mpSlice = createSlice({
             ...state,
             allSongs: action.payload,
             currentSong: action.payload[0] || {} // if not set then return empty object
+            
         }),
         GET_SONGS_FAILURE: (state, action) => ({ // cancel loader then show error response
             ...state,

@@ -4,10 +4,20 @@ import { connect } from 'react-redux';
 import { TOGGLE_PLAY, NEXT_SONG } from '../../store/slices'
 
 const audioFile = new Audio();
-// let songNum = 0;
+let songNum = 0
 
-const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
+const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) => {
 
+
+    const iterator = () => {
+        console.log(typeof(songNum))
+        songNum = songNum++;
+        console.log("top " + songNum++)
+        if(songNum === allSongs.length) {
+            songNum = 0;
+        } 
+        nextSong(songNum)
+    }
 
     
     const audioPlay = () => {
@@ -19,7 +29,7 @@ const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
     }
 
 
-    console.log("from audio " + JSON.stringify(currentSong))
+    // console.log("from audio " + JSON.stringify(allSongs) + allSongs.length)
 
     React.useEffect(() => {
         audioFile.src=currentSong.songSource
@@ -29,7 +39,7 @@ const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
     return (
         <div>
             <button id='playButton' onClick={() => {togglePlay(); audioPlay()}}> {play ? 'Play' : 'Pause'} </button>
-            <button id='skipButton' onClick={() => {nextSong()}}> Skip Next </button>
+            <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button>
         </div>
     )
 }
@@ -38,7 +48,8 @@ const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
 // mapping values in the state to the properties 
 const mapStateToProps = state => ({
     play: state.isPlaying,
-    currentSong: state.currentSong
+    currentSong: state.currentSong,
+    allSongs: state.allSongs
 })
 
 // mapping slice action function to properties
