@@ -7,8 +7,8 @@ router.get('/songs', async (req,res) => {
     try {
         const allSongs = await Songs.find();
         allSongs.forEach((song) => {
-            song.imageSource = `https://localhost:5000/songImage/${song.imageSource}`
-            song.songSource = `https://localhost:5000/songAudio/${song.songSource}`
+            song.imageSource = `http://localhost:5000/songImage/${song.imageSource}`
+            song.songSource = `http://localhost:5000/songAudio/${song.songSource}`
         })
 
         console.log(allSongs)
@@ -20,15 +20,15 @@ router.get('/songs', async (req,res) => {
 
 // GET req - get specific songs by id
 router.get('/songs/:id', async (req,res) => {
-    console.log(req.params.id);
+    // console.log("from get songsid: " + req.params.id);
     try {
-        const singleSong = await Songs.find({_id: req.params.id});
-        singleSong.map((song) => {
-            song.imageSource = `https://localhost:5000/songImage/${song.imageSource}`
-            song.songSource = `https://localhost:5000/songAudio/${song.songSource}`
-        })
+        const singleSongArr = await Songs.find({_id: req.params.id});
+        const singleSong = singleSongArr[0];
         
-        console.log(singleSong)
+        singleSong.imageSource = `http://localhost:5000/songImage/${singleSong.imageSource}`
+        singleSong.songSource = `http://localhost:5000/songAudio/${singleSong.songSource}`
+
+        // console.log(singleSong)
         res.json(singleSong);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error

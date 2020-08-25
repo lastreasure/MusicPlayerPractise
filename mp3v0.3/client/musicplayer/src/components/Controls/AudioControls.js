@@ -1,12 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
-import { TOGGLE_PLAY } from '../../store/slices'
+import { TOGGLE_PLAY, NEXT_SONG } from '../../store/slices'
 
-const audioFile = new Audio('Dont_Worry_Be_Happy.mp3');
+const audioFile = new Audio();
+// let songNum = 0;
 
-const AudioControls = ({togglePlay, play, allSongs}) => {
+const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
 
+
+    
     const audioPlay = () => {
         if (play) {
             audioFile.play()
@@ -15,13 +18,19 @@ const AudioControls = ({togglePlay, play, allSongs}) => {
         }
     }
 
-    console.log("from audio " + allSongs)
 
+    console.log("from audio " + JSON.stringify(currentSong))
+
+    // 
+    React.useEffect(() => {
+        audioFile.src=currentSong.songSource
+    }, [currentSong])
 
     
     return (
         <div>
             <button id='playButton' onClick={() => {togglePlay(); audioPlay()}}> {play ? 'Play' : 'Pause'} </button>
+            <button id='skipButton' onClick={() => {nextSong()}}> Skip Next </button>
         </div>
     )
 }
@@ -30,12 +39,13 @@ const AudioControls = ({togglePlay, play, allSongs}) => {
 // mapping values in the state to the properties 
 const mapStateToProps = state => ({
     play: state.isPlaying,
-    allSongs: state.allSongs
+    currentSong: state.currentSong
 })
 
 // mapping slice action function to properties
 const mapDispatchToProps = {
-    togglePlay: TOGGLE_PLAY
+    togglePlay: TOGGLE_PLAY,
+    nextSong: NEXT_SONG
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(AudioControls);

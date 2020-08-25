@@ -16,17 +16,26 @@ const mpSlice = createSlice({
         }),
         GET_SONGS_SUCCESS: (state, action) => ({ 
             ...state,
-            allSongs: action.payload
+            allSongs: action.payload,
+            currentSong: action.payload[0] || {} // if not set then return empty object
         }),
         GET_SONGS_FAILURE: (state, action) => ({ // cancel loader then show error response
             ...state,
             error: action.payload
         }),
+        SET_CURRENT_SONG: (state, action) => ({
+            ...state,
+            currentSong: state.allSongs[action.payload]
+        }),
+        NEXT_SONG: (state, action) => ({
+            ...state,
+            currentSong: state.allSongs[action.payload]
+        }),
     }
 })
 
 // destructuring th e actions from the slice
-export const {TOGGLE_PLAY, GET_SONGS_SUCCESS, GET_SONGS_REQUEST, GET_SONGS_FAILURE} = mpSlice.actions;
+export const {TOGGLE_PLAY, GET_SONGS_SUCCESS, GET_SONGS_REQUEST, GET_SONGS_FAILURE, NEXT_SONG} = mpSlice.actions;
 
 // FETCHING SONGS
 export const getSongs = () => dispatch => {
