@@ -10,15 +10,24 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) =
 
 
     const iterator = () => {
-        console.log(typeof(songNum))
-        songNum = songNum++;
-        console.log("top " + songNum++)
         if(songNum === allSongs.length) {
             songNum = 0;
         } 
+        console.log(typeof(songNum))
+        songNum = songNum++;
+        console.log("top " + songNum++)
         nextSong(songNum)
     }
 
+    const decrement = () => {
+        if(!songNum < 1 || songNum === 1) {
+            songNum = songNum--
+            console.log("top " + songNum--)
+            nextSong(songNum)
+        } else {
+            songNum = 0;
+        }
+    }
     
     const audioPlay = () => {
         if (play) {
@@ -38,8 +47,10 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, currentSong={}}) =
     
     return (
         <div>
-            <button id='playButton' onClick={() => {togglePlay(); audioPlay()}}> {play ? 'Play' : 'Pause'} </button>
+            <button id='previousButton' onClick={() => {decrement(); console.log("from dec " + songNum)}}> Skip Back </button>
+            <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button>
             <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button>
+
         </div>
     )
 }
