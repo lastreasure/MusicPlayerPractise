@@ -21,7 +21,6 @@ const AudioControls = ({togglePlay, nextSong, play, currentSong={}}) => {
 
     console.log("from audio " + JSON.stringify(currentSong))
 
-    // 
     React.useEffect(() => {
         audioFile.src=currentSong.songSource
     }, [currentSong])
