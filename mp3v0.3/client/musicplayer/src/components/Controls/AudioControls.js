@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
 import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
@@ -63,20 +63,6 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     // Whenever the currentSong changes then provide an updated currentSong song source
 
 
-  
-    
-    // console.log(currentSong)
-    // console.log(typeof(currentSong))
-    // console.log(allSongs)
-    // console.log(typeof(allSongs))
-
-    // let songListArr = new Array()
-    // allSongs.forEach(song => {
-    //     songListArr.push(song)
-    // })
-    // console.log("songlistarr " + songListArr)
-
-
     return (
         <div>
             <Button id='previousButton' variant="contained" color="primary"
@@ -98,6 +84,10 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
                     onClick={() => {shuffle(allSongs)}}>
                 <ShuffleIcon/>
             </Button>
+
+            {/* {allSongs.map(song => {
+                return <pre>{JSON.stringify(song)}</pre>
+            })} */}
 
         </div>
     )

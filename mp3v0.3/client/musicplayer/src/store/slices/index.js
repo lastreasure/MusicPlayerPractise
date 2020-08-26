@@ -4,7 +4,7 @@ const mpSlice = createSlice({
     // Name used in action types
     name: 'MUSIC_PLAYER',
     // Initial state for the reducer to use
-    initialState: {},
+    initialState: {allSongs: [] },
     // An object of reducers whoms name will generate an action
     reducers: {
         TOGGLE_PLAY: (state) => ({
@@ -35,7 +35,7 @@ const mpSlice = createSlice({
         }),
         SHUFFLE: (state, action) => ({
             ...state,
-            allSongs: shuffle([action.payload]),
+            allSongs: shuffle(action.payload),
         }),
     }
 })
