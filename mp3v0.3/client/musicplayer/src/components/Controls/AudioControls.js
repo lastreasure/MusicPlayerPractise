@@ -8,6 +8,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
 import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import ReplayIcon from '@material-ui/icons/Replay';
 import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 
@@ -62,9 +63,22 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     }, [currentSong])
     // Whenever the currentSong changes then provide an updated currentSong song source
 
+    const replay = () => {
+        audioFile.pause() 
+        setPlayIcon(<PlayArrowIcon/>)
+        audioFile.currentTime = 0
+        audioFile.play()
+        setPlayIcon(<PauseIcon/>)    
+    }
 
     return (
         <div>
+
+            <Button id='replayButton' variant="contained" color="primary"
+                    onClick={() => {{replay()}}}>
+                <ReplayIcon/>
+            </Button>
+
             <Button id='previousButton' variant="contained" color="primary"
                     onClick={() => {decrement() ; audioPlay(); console.log("from dec " + songNum)}}> 
                 <SkipPreviousIcon/>
