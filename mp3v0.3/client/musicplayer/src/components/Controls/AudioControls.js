@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
 import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
@@ -13,12 +13,13 @@ import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 const audioFile = new Audio();
 let songNum = 0
-let pausePlayIcon = <PlayArrowIcon/>
 
 const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, currentSong={}}) => {
 
+    const [playIcon, setPlayIcon] = useState(<PlayArrowIcon/>)
+
     const iterator = () => {
-        pausePlayIcon=<PlayArrowIcon/>
+        setPlayIcon(<PlayArrowIcon/>)
         if(songNum === allSongs.length-1) {
             songNum = 0;
         } 
@@ -30,7 +31,7 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     }
 
     const decrement = () => {
-        pausePlayIcon=<PlayArrowIcon/>
+        setPlayIcon(<PlayArrowIcon/>)
         if(songNum === 0 ) {
             songNum = allSongs.length;        
         } 
@@ -50,9 +51,9 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
 
     const iconPlay = () => {
         if (!isPaused) {
-            pausePlayIcon = <PlayArrowIcon />
+            setPlayIcon(<PlayArrowIcon/>)
         } else {
-            pausePlayIcon = <PauseIcon/>
+            setPlayIcon(<PauseIcon/>)
         }
     }
 
@@ -81,7 +82,7 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
 
             <Button id='playButton' variant="contained" color="primary" 
                     onClick={() => {audioPlay(); togglePlay(); iconPlay(); console.log(songNum)}}>
-                {pausePlayIcon}
+                {playIcon}
             </Button>
 
             <Button id='skipButton' variant="contained" color="primary"
