@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
 import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
@@ -60,7 +60,10 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     React.useEffect(() => {
         audioFile.src=currentSong.songSource
     }, [currentSong])
+    // Whenever the currentSong changes then provide an updated currentSong song source
 
+
+  
     
     // console.log(currentSong)
     // console.log(typeof(currentSong))
@@ -72,6 +75,7 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     //     songListArr.push(song)
     // })
     // console.log("songlistarr " + songListArr)
+
 
     return (
         <div>

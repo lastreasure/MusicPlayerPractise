@@ -26,6 +26,7 @@ function App()  {
   React.useEffect(() => {
     store.dispatch(getSongs())
   }, [] )
+  // Passing effect empty array so that the hook only ever runs on mount
 
   const classes = useStyles();
 
