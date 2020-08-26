@@ -35,7 +35,7 @@ const mpSlice = createSlice({
         }),
         SHUFFLE: (state, action) => ({
             ...state,
-            allSongs: shuffle(action.payload)
+            allSongs: shuffle([action.payload]),
         }),
     }
 })
@@ -59,9 +59,9 @@ export const getSongs = () => dispatch => {
     .catch((error) => dispatch(GET_SONGS_FAILURE(error)));
 }
 
-function shuffle (arr) { 
-    const length = arr.length;
-    for(let i = length-1; i > 0; i--){
+function shuffle (array) {   
+    let arr = new Array(array) 
+    for(let i = arr.length-1; i > 0; i--){
         const j = Math.floor(Math.random() * i)
         const temp = arr[i]
         arr[i] = arr[j]

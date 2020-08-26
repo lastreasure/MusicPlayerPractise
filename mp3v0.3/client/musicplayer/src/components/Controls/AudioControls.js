@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'; 
 // retrieve action from slices
 import { TOGGLE_PLAY, NEXT_SONG, SHUFFLE } from '../../store/slices'
@@ -60,6 +60,17 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
         audioFile.src=currentSong.songSource
     }, [currentSong])
 
+    
+    // console.log(currentSong)
+    // console.log(typeof(currentSong))
+    // console.log(allSongs)
+    // console.log(typeof(allSongs))
+
+    // let songListArr = new Array()
+    // allSongs.forEach(song => {
+    //     songListArr.push(song)
+    // })
+    // console.log("songlistarr " + songListArr)
 
     return (
         <div>
@@ -78,7 +89,8 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
                 <SkipNextIcon/>
             </Button>
 
-            <Button id='shuffle' variant="contained" color="primary">
+            <Button id='shuffle' variant="contained" color="primary"
+                    onClick={() => {shuffle(allSongs)}}>
                 <ShuffleIcon/>
             </Button>
 
