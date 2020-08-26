@@ -11,7 +11,7 @@ router.get('/songs', async (req,res) => {
             song.songSource = `http://localhost:5000/songAudio/${song.songSource}`
         })
 
-        console.log(allSongs)
+        // console.log(allSongs)
         res.json(allSongs);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error

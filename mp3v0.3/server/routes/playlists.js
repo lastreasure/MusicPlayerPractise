@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const Playlist = require('../models/playlist');
-const fetch = require("node-fetch");
-const axios = require('axios');
-
 
 // GET req - get all playlists
 router.get('/playlists', async (req,res) => {
     try {
         const allPlaylists = await Playlist.find();
-
+        //
+        allPlaylists.forEach((playlist) => {
+            playlist.playlistSongId.forEach((id) => {
+                playlist.playlistSongs.push(`http://localhost:5000/songs/${id}`)
+                
+            })
+        })
+        //
         res.json(allPlaylists);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error
@@ -21,8 +25,13 @@ router.get('/playlists/:id', async (req,res) => {
 
     try {
         const singlePlaylistArr = await Playlist.find({_id: req.params.id});
-        singlePlaylist = singlePlaylistArr[0];
-        console.log(singlePlaylist);
+        let singlePlaylist = singlePlaylistArr[0];
+        //
+        singlePlaylist.playlistSongId.forEach(async (id) => {
+            singlePlaylist.playlistSongs.push(`http://localhost:5000/songs/${id}`)
+            singlePlaylist.playlistSongs.push(`http://localhost:5000/songs/${id}`)
+        })
+        //
         res.json(singlePlaylist);
     } catch (err) {
         res.status(500).json({message: err.message}); // Server error

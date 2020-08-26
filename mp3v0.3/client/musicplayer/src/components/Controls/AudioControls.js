@@ -71,6 +71,12 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
         setPlayIcon(<PauseIcon/>)    
     }
 
+        // let allSongsArr = [];
+        // allSongs.map(song => {
+        //         allSongsArr.push(JSON.stringify(song))
+        // })
+        // console.log("all arr from ausio controls: " + allSongsArr)
+
     return (
         <div>
             <Button id='replayButton' variant="contained" color="primary"
