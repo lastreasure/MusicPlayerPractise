@@ -2,6 +2,7 @@ import React from 'react';
 import AudioControls from './components/Controls/AudioControls';
 import SongImage from './components/SongDisplay/SongImage';
 import Header from './components/Layout/Header';
+import SongTable from './components/SongDisplay/SongTable'
 import store from './store';
 import { getSongs, getPlaylists } from './store/slices';
 
@@ -51,7 +52,7 @@ function App()  {
           <AudioControls/>
         </Grid>
         <Grid item xs={12}>
-          Insert Table
+          <SongTable/>
         </Grid>
         <Grid item xs={12}>
           <Paper className={classes.paper}>xs=12</Paper>
