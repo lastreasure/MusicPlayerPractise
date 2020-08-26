@@ -41,6 +41,9 @@ function App()  {
           <SongImage />
         </Grid>
         <Grid item xs={12}>
+          Insert slider here
+        </Grid>
+        <Grid item xs={12}>
           <AudioControls/>
         </Grid>
         <Grid item xs={12}>
