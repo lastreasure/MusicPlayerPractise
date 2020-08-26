@@ -16,11 +16,8 @@ let songNum = 0
 
 const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSong={}}) => {
 
-    // console.log('this is image source: ' + currentSong);
-
-
     const iterator = () => {
-        if(songNum === allSongs.length) {
+        if(songNum === allSongs.length-1) {
             songNum = 0;
         } 
         console.log(typeof(songNum))
@@ -30,15 +27,24 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
     }
 
     const decrement = () => {
-        if(!songNum < 1 || songNum === 1) {
+        if(songNum === 0 ) {
+            songNum = allSongs.length;
+        } 
             songNum = songNum--
             console.log("top " + songNum--)
             nextSong(songNum)
-        } else {
-            songNum = 0;
-        }
+        
     }
     
+
+    // if(!songNum < 1 || songNum === 1) {
+    //     songNum = songNum--
+    //     console.log("top " + songNum--)
+    //     nextSong(songNum)
+    // } else {
+    //     songNum = 0;
+    // }
+
     const audioPlay = () => {
         if (play) {
             audioFile.play()
@@ -72,12 +78,6 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
             <Button id='shuffle' variant="contained" color="primary">
                 <ShuffleIcon/>
             </Button>
-
-
-            {/* <button id='previousButton' onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> Skip Back </button> */}
-            {/* <button id='playButton' onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}> {play ? 'Play' : 'Pause'} </button> */}
-            {/* <button id='skipButton' onClick={() => {iterator()}}> Skip Next </button> */}
-            {/* <button id='shuffleButton' onClick={() => {shuffle(allSongs)}}> Shuffle </button> */}
 
         </div>
     )
