@@ -42,19 +42,11 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
     }
 
     const audioPlay = () => {
-        if (!isPaused) {
-            audioFile.pause()
-        } else {
-            audioFile.play()
-        }
+        !isPaused ? audioFile.pause() : audioFile.play()
     }
 
     const iconPlay = () => {
-        if (!isPaused) {
-            setPlayIcon(<PlayArrowIcon/>)
-        } else {
-            setPlayIcon(<PauseIcon/>)
-        }
+        !isPaused ? setPlayIcon(<PlayArrowIcon/>) : setPlayIcon(<PauseIcon/>)
     }
 
     React.useEffect(() => {
