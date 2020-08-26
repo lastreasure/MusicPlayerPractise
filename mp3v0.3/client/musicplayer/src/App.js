@@ -50,8 +50,6 @@ function App()  {
       </Grid>
     </div>
   );
-  
-  
 }
 
 export default App;

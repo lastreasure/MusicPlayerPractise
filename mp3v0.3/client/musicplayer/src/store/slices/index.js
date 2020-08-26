@@ -9,7 +9,8 @@ const mpSlice = createSlice({
     reducers: {
         TOGGLE_PLAY: (state) => ({
             ...state,
-            isPlaying: !state.isPlaying
+            isPaused: !state.isPaused
+            // isPaused: action.payload
         }),
         GET_SONGS_REQUEST: (state) => ({ // loading variable 
             ...state
@@ -29,7 +30,8 @@ const mpSlice = createSlice({
         }),
         NEXT_SONG: (state, action) => ({
             ...state,
-            currentSong: state.allSongs[action.payload]
+            currentSong: state.allSongs[action.payload],
+            isPaused: true
         }),
         SHUFFLE: (state, action) => ({
             ...state,

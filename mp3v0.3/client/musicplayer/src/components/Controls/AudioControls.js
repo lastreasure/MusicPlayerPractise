@@ -15,43 +15,43 @@ const audioFile = new Audio();
 let songNum = 0
 let pausePlayIcon = <PlayArrowIcon/>
 
-const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSong={}}) => {
+const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, currentSong={}}) => {
 
     const iterator = () => {
         pausePlayIcon=<PlayArrowIcon/>
         if(songNum === allSongs.length-1) {
             songNum = 0;
-            // pausePlayIcon=<PlayArrowIcon/>
         } 
         console.log(typeof(songNum))
         songNum = songNum++;
         console.log("top " + songNum++)
         nextSong(songNum)
-
-        play=false
-        // pausePlayIcon=<PlayArrowIcon/>
+        
     }
 
     const decrement = () => {
         pausePlayIcon=<PlayArrowIcon/>
-        play=false
         if(songNum === 0 ) {
-            songNum = allSongs.length;
-            // pausePlayIcon=<PlayArrowIcon/>
-        
+            songNum = allSongs.length;        
         } 
             songNum = songNum--
             console.log("top " + songNum--)
             nextSong(songNum)
-            // pausePlayIcon=<PlayArrowIcon/>
+        
     }
 
     const audioPlay = () => {
-        if (!play) {
+        if (!isPaused) {
             audioFile.pause()
-            pausePlayIcon = <PlayArrowIcon />
         } else {
             audioFile.play()
+        }
+    }
+
+    const iconPlay = () => {
+        if (!isPaused) {
+            pausePlayIcon = <PlayArrowIcon />
+        } else {
             pausePlayIcon = <PauseIcon/>
         }
     }
@@ -64,18 +64,17 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
     return (
         <div>
             <Button id='previousButton' variant="contained" color="primary"
-                    onClick={() => {decrement() ; audioPlay(); togglePlay();console.log("from dec " + songNum)}}> 
+                    onClick={() => {decrement() ; audioPlay(); console.log("from dec " + songNum)}}> 
                 <SkipPreviousIcon/>
             </Button>
 
             <Button id='playButton' variant="contained" color="primary" 
-                    onClick={() => {audioPlay(); togglePlay(); console.log(songNum)}}>
-                {/* {play ? <PlayArrowIcon/> : <PauseIcon/> } */}
+                    onClick={() => {audioPlay(); togglePlay(); iconPlay(); console.log(songNum)}}>
                 {pausePlayIcon}
             </Button>
 
             <Button id='skipButton' variant="contained" color="primary"
-                    onClick={() => {iterator(); audioPlay(); togglePlay();console.log("from incre " + songNum)}}>
+                    onClick={() => {iterator(); audioPlay(); console.log("from incre " + songNum)}}>
                 <SkipNextIcon/>
             </Button>
 
@@ -90,7 +89,7 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
 // Retrieve state from redux and map to properties to the component to use inside the component
 // mapping values in the state to the properties 
 const mapStateToProps = state => ({
-    play: state.isPlaying,
+    isPaused: state.isPaused,
     currentSong: state.currentSong,
     allSongs: state.allSongs
 
