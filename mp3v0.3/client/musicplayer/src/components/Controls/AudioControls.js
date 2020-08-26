@@ -13,36 +13,47 @@ import ShuffleIcon from '@material-ui/icons/Shuffle';
 
 const audioFile = new Audio();
 let songNum = 0
+let pausePlayIcon = <PlayArrowIcon/>
 
 const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSong={}}) => {
 
     const iterator = () => {
+        pausePlayIcon=<PlayArrowIcon/>
         if(songNum === allSongs.length-1) {
             songNum = 0;
+            // pausePlayIcon=<PlayArrowIcon/>
         } 
         console.log(typeof(songNum))
         songNum = songNum++;
         console.log("top " + songNum++)
         nextSong(songNum)
+
+        play=false
+        // pausePlayIcon=<PlayArrowIcon/>
     }
 
     const decrement = () => {
+        pausePlayIcon=<PlayArrowIcon/>
+        play=false
         if(songNum === 0 ) {
             songNum = allSongs.length;
+            // pausePlayIcon=<PlayArrowIcon/>
+        
         } 
             songNum = songNum--
             console.log("top " + songNum--)
             nextSong(songNum)
-        
+            // pausePlayIcon=<PlayArrowIcon/>
     }
 
     const audioPlay = () => {
         if (!play) {
             audioFile.pause()
+            pausePlayIcon = <PlayArrowIcon />
         } else {
             audioFile.play()
+            pausePlayIcon = <PauseIcon/>
         }
-        
     }
 
     React.useEffect(() => {
@@ -53,17 +64,18 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
     return (
         <div>
             <Button id='previousButton' variant="contained" color="primary"
-                    onClick={() => {decrement() ; togglePlay(); audioPlay(); console.log("from dec " + songNum)}}> 
+                    onClick={() => {decrement() ; audioPlay(); togglePlay();console.log("from dec " + songNum)}}> 
                 <SkipPreviousIcon/>
             </Button>
 
             <Button id='playButton' variant="contained" color="primary" 
-                    onClick={() => {togglePlay(); audioPlay(); console.log(songNum)}}>
-                {play ? <PlayArrowIcon/> : <PauseIcon/> }
+                    onClick={() => {audioPlay(); togglePlay(); console.log(songNum)}}>
+                {/* {play ? <PlayArrowIcon/> : <PauseIcon/> } */}
+                {pausePlayIcon}
             </Button>
 
             <Button id='skipButton' variant="contained" color="primary"
-                    onClick={() => {iterator(); togglePlay(); audioPlay(); console.log("from incre " + songNum)}}>
+                    onClick={() => {iterator(); audioPlay(); togglePlay();console.log("from incre " + songNum)}}>
                 <SkipNextIcon/>
             </Button>
 
