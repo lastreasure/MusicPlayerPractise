@@ -3,7 +3,7 @@ import AudioControls from './components/Controls/AudioControls';
 import SongImage from './components/SongDisplay/SongImage';
 import Header from './components/Layout/Header';
 import store from './store';
-import { getSongs } from './store/slices';
+import { getSongs, getPlaylists } from './store/slices';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
@@ -26,6 +26,10 @@ function App()  {
 
   React.useEffect(() => {
     store.dispatch(getSongs())
+  }, [] )
+
+  React.useEffect(() => {
+    store.dispatch(getPlaylists())
   }, [] )
   // Passing effect empty array so that the hook only ever runs on mount
 

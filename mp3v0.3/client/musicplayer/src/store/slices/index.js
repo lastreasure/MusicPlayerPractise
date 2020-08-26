@@ -4,13 +4,13 @@ const mpSlice = createSlice({
     // Name used in action types
     name: 'MUSIC_PLAYER',
     // Initial state for the reducer to use
-    initialState: {allSongs: [] },
+    initialState: { allSongs: [],
+                    allPlaylists: []},
     // An object of reducers whoms name will generate an action
     reducers: {
         TOGGLE_PLAY: (state) => ({
             ...state,
             isPaused: !state.isPaused
-            // isPaused: action.payload
         }),
         GET_SONGS_REQUEST: (state) => ({ // loading variable 
             ...state
@@ -24,9 +24,25 @@ const mpSlice = createSlice({
             ...state,
             error: action.payload
         }),
+        GET_PLAYLISTS_REQUEST: (state) => ({ // loading variable 
+            ...state
+        }),
+        GET_PLAYLISTS_SUCCESS: (state, action) => ({ 
+            ...state,
+            allPlaylists: action.payload,
+            currentPlaylist: action.payload[0] || {} // if not set then return empty object
+        }),
+        GET_PLAYLISTS_FAILURE: (state, action) => ({ // cancel loader then show error response
+            ...state,
+            error: action.payload
+        }),
         SET_CURRENT_SONG: (state, action) => ({
             ...state,
             currentSong: state.allSongs[action.payload]
+        }),
+        SET_CURRENT_PLAYLIST: (state, action) => ({
+            ...state,
+            currentPlaylist: state.allPlaylists[action.payload]
         }),
         NEXT_SONG: (state, action) => ({
             ...state,
@@ -46,6 +62,9 @@ export const {  TOGGLE_PLAY,
                 GET_SONGS_SUCCESS, 
                 GET_SONGS_REQUEST, 
                 GET_SONGS_FAILURE, 
+                GET_PLAYLISTS_SUCCESS, 
+                GET_PLAYLISTS_REQUEST, 
+                GET_PLAYLISTS_FAILURE, 
                 NEXT_SONG,
                 SHUFFLE} 
                 = mpSlice.actions;
@@ -58,6 +77,16 @@ export const getSongs = () => dispatch => {
     // dispatch the state to the reducer
     .then(songs => dispatch(GET_SONGS_SUCCESS(songs)))
     .catch((error) => dispatch(GET_SONGS_FAILURE(error)));
+}
+
+// FETCHING PLAYLIST
+export const getPlaylists = () => dispatch => {
+    dispatch(GET_PLAYLISTS_REQUEST())
+    fetch('http://localhost:5000/playlists')
+    .then(res => res.json())
+    // dispatch the state to the reducer
+    .then(playlist => dispatch(GET_PLAYLISTS_SUCCESS(playlist)))
+    .catch((error) => dispatch(GET_PLAYLISTS_FAILURE(error)));
 }
 
 function shuffle (arr) {   
