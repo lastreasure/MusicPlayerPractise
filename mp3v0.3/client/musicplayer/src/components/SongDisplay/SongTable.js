@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux'; 
+
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -23,8 +25,12 @@ const rows = [
     createData('23424', 'Ice cream sandwich', "22"),
 ];
 
-function SongTable() {
+const SongTable = (allSongs, currentSong) => {
     const classes = useStyles();
+
+    // allSongs.map(song => {
+    //     return <pre>{JSON.stringify(song)}</pre>
+    // })
 
     return (
         <TableContainer component={Paper}>
@@ -50,4 +56,12 @@ function SongTable() {
     );
 }
 
-export default SongTable;
+// Retrieve state from redux and map to properties to the component to use inside the component
+// mapping values in the state to the properties 
+const mapStateToProps = state => ({
+    currentSong: state.currentSong,
+    allSongs: state.allSongs
+
+})
+
+export default connect(mapStateToProps)(SongTable);
