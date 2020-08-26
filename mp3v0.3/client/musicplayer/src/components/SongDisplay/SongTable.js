@@ -25,10 +25,8 @@ const rows = [
     createData('23424', 'Ice cream sandwich', "22"),
 ];
 
-const SongTable = (allSongs = [], currentSong) => {
+const SongTable = (allSongs = []) => {
     const classes = useStyles();
-
-    console.log(allSongs)
 
     // allSongs.map(song => {
     //     return <pre>{JSON.stringify(song)}</pre>

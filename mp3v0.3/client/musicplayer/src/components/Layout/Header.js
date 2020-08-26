@@ -1,15 +1,19 @@
 import React from 'react';
 import createActivityDetector from 'activity-detector'
+import { connect } from 'react-redux'; 
+
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import SearchIcon from '@material-ui/icons/Search';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import IconButton from '@material-ui/core/IconButton'
+
+import TextField from '@material-ui/core/TextField';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -64,7 +68,12 @@ const useStyles = makeStyles((theme) => ({
     },
     }));
 
-    export default function SearchAppBar() {
+    const top100Films = [
+        { title: 'The Shawshank Redemption', year: 1994 },
+        { title: 'The Godfather', year: 1972 },
+    ]
+
+const Header = (allSongs = []) => {
     const classes = useStyles();
 
 
@@ -99,21 +108,24 @@ const useStyles = makeStyles((theme) => ({
             <Typography className={classes.title} variant="h6" noWrap>
                 Music Player
             </Typography>
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                <SearchIcon />
-                </div>
-                <InputBase
-                placeholder="Search…"
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                inputProps={{ 'aria-label': 'search' }}
+                <Autocomplete
+                    id="combo-box-demo"
+                    options={allSongs.allSongs}
+                    getOptionLabel={(option) => option.title}
+                    groupBy={(option) => option.artist}
+                    style={{ width: 250 }}
+                    renderInput={(params) => <TextField {...params} label="Search song title" variant="outlined" />}
                 />
-            </div>
             </Toolbar>
         </AppBar>
         </div>
     );
 }
+
+// Retrieve state from redux and map to properties to the component to use inside the component
+// mapping values in the state to the properties 
+const mapStateToProps = state => ({
+    allSongs: state.allSongs
+})
+
+export default connect(mapStateToProps)(Header);
