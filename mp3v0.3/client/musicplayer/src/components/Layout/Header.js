@@ -1,10 +1,16 @@
 import React from 'react';
+import createActivityDetector from 'activity-detector'
+
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
+import NightsStayIcon from '@material-ui/icons/NightsStay';
+import WbSunnyIcon from '@material-ui/icons/WbSunny';
+import IconButton from '@material-ui/core/IconButton'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -61,10 +67,35 @@ const useStyles = makeStyles((theme) => ({
     export default function SearchAppBar() {
     const classes = useStyles();
 
+
+    // Idle mode
+    function useIdle(options) {
+        const [isIdle, setIdle] = React.useState(false)
+        // Only render on mount
+        React.useEffect((options) => {
+        const activityDetector = createActivityDetector(options)
+        activityDetector.on('idle', () => setIdle(true))
+        activityDetector.on('active', () => setIdle(false))
+        //remove all event handlers from body - set by activity detector
+        return () => activityDetector.stop()
+        }, [])
+        return isIdle
+    }
+    
+    const isIdle = useIdle({timeToIdle: 3000});
+
     return (
         <div className={classes.root}>
         <AppBar position="static">
             <Toolbar>
+            <IconButton
+                edge="start"
+                className={classes.menuButton}
+                color="inherit"
+                aria-label="open drawer"
+            >
+                {isIdle ? <NightsStayIcon/>  : <WbSunnyIcon/>}
+            </IconButton>
             <Typography className={classes.title} variant="h6" noWrap>
                 Music Player
             </Typography>

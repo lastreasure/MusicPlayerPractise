@@ -73,7 +73,6 @@ const AudioControls = ({togglePlay, nextSong, isPaused, allSongs, shuffle, curre
 
     return (
         <div>
-
             <Button id='replayButton' variant="contained" color="primary"
                     onClick={() => {{replay()}}}>
                 <ReplayIcon/>
