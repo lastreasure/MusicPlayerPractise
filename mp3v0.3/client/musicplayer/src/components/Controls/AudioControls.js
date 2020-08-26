@@ -35,22 +35,14 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
             nextSong(songNum)
         
     }
-    
-
-    // if(!songNum < 1 || songNum === 1) {
-    //     songNum = songNum--
-    //     console.log("top " + songNum--)
-    //     nextSong(songNum)
-    // } else {
-    //     songNum = 0;
-    // }
 
     const audioPlay = () => {
-        if (play) {
-            audioFile.play()
-        } else {
+        if (!play) {
             audioFile.pause()
+        } else {
+            audioFile.play()
         }
+        
     }
 
     React.useEffect(() => {
@@ -61,7 +53,7 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
     return (
         <div>
             <Button id='previousButton' variant="contained" color="primary"
-                    onClick={() => {decrement() ;  console.log("from dec " + songNum)}}> 
+                    onClick={() => {decrement() ; togglePlay(); audioPlay(); console.log("from dec " + songNum)}}> 
                 <SkipPreviousIcon/>
             </Button>
 
@@ -71,7 +63,7 @@ const AudioControls = ({togglePlay, nextSong, play, allSongs, shuffle, currentSo
             </Button>
 
             <Button id='skipButton' variant="contained" color="primary"
-                    onClick={() => {iterator()}}>
+                    onClick={() => {iterator(); togglePlay(); audioPlay(); console.log("from incre " + songNum)}}>
                 <SkipNextIcon/>
             </Button>
 
